@@ -37,12 +37,12 @@ jobs:
         run: npm run typecheck
         working-directory: "doxa-studio-web-strategy (3)"
 
-      - name: Tester le site (smoke test)
-        run: npm test
-        working-directory: "doxa-studio-web-strategy (3)"
-
       - name: Build de production
         run: npm run build
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Tester le site (smoke test)
+        run: npm test
         working-directory: "doxa-studio-web-strategy (3)"
 
       - name: Ajouter le domaine personnalisé
