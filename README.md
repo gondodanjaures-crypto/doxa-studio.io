@@ -29,22 +29,23 @@ principales, un seul `<h1>`, les `alt` d'images, l'absence d'erreurs JavaScript.
 
 ## 🌐 Mise en ligne (GitHub Pages)
 
-Le build est prêt dans [`docs/`](./docs/) — il ne reste qu'à **activer GitHub Pages**
+Le site se déploie automatiquement via GitHub Actions (`.github/workflows/deploy-pages.yml`) :
+build, tests et publication à chaque push. Il ne reste qu'à **activer GitHub Pages**
 (une seule fois) :
 
-1. Ouvrez : **https://github.com/gondodanjaures-crypto/doxa-studio.io/settings/pages**
-2. **Source** : *Deploy from a branch* (Déployer depuis une branche)
-3. **Branche** : `arena/01a0f055-doxa-studio-io` — **Dossier** : `/docs` → **Save**
-4. ~1 minute plus tard, le site est en ligne sur :
-   **https://gondodanjaures-crypto.github.io/doxa-studio.io/**
+1. Connectez-vous à GitHub avec le compte propriétaire du dépôt (`gondodanjaures-crypto`)
+   **dans un navigateur** (Chrome, Safari…) — les réglages ne sont pas dans l'app GitHub.
+2. Ouvrez : **https://github.com/gondodanjaures-crypto/doxa-studio.io/settings/pages**
+3. Section **« Build and deployment »** → **Source** : choisissez **« GitHub Actions »** → *Save*.
+4. Onglet **Actions** : le workflow « Deploy to GitHub Pages » se lance → ~1 minute plus tard,
+   le site est en ligne sur : **https://gondodanjaures-crypto.github.io/doxa-studio.io/**
 
-Pour publier une nouvelle version du site après une modification :
+> 💡 Alternative (sans Actions) : Source → *Deploy from a branch* → branche
+> `arena/01a0f055-doxa-studio-io` → dossier `/docs` → *Save* (le build est déjà prêt
+> dans [`docs/`](./docs/)).
 
-```bash
-cd "doxa-studio-web-strategy (3)"
-npm run deploy:pages   # rebuild + copie vers ../../docs/
-cd ../.. && git add docs && git commit -m "deploy" && git push
-```
+Pour publier une nouvelle version du site après une modification : `git push` suffit
+(ou manuellement : `npm run deploy:pages` puis commit du dossier `docs/`).
 
 ## 🏷️ Nom de domaine gratuit
 
