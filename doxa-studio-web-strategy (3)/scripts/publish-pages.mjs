@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(here, "..");
-const repoRoot = join(projectRoot, "..", "..");
+const repoRoot = join(projectRoot, "..");
 
 const from = join(projectRoot, "dist", "index.html");
 const docsDir = join(repoRoot, "docs");
