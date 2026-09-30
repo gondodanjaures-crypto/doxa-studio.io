@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Doxa Studio — Agence de communication et de production visuelle à Abidjan, Côte d'Ivoire. Motion design, 3D, identité visuelle, production vidéo. Donnez vie à vos projets visuels. +225 07 47 27 68 79 — gondodanjaures@gmail.com"
+    />
+    <meta name="theme-color" content="#0B0B0B" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230B0B0B'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpath d='M-22.6-40A46 46 0 1 1-22.6 40A42 42 0 0 0-22.6-40Z' transform='translate(60 60)'/%3E%3Cpath d='M-14.5-22.8A27 27 0 1 1-14.5 22.8A24.5 24.5 0 0 0-14.5-22.8Z' transform='translate(63 66) rotate(16)'/%3E%3Cpath d='M-8.5-11.1A14 14 0 1 1-8.5 11.1A12 12 0 0 0-8.5-11.1Z' transform='translate(59 59) rotate(42)'/%3E%3Cellipse rx='3' ry='4.2' transform='translate(56 55) rotate(-30)' fill='%23FF2A2A'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <meta
+      property="og:title"
+      content="Doxa Studio — Agence de communication & production visuelle"
+    />
+    <meta
+      property="og:description"
+      content="Motion design, 3D, identité visuelle et production vidéo à Abidjan. Donnez vie à vos projets visuels."
+    />
+    <meta property="og:locale" content="fr_CI" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Doxa Studio — Agence de communication & production visuelle | Abidjan</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Doxa Studio",
+        "description": "Agence de communication et de production visuelle : motion design, 3D, identité visuelle, production vidéo.",
+        "email": "gondodanjaures@gmail.com",
+        "telephone": ["+2250747276879", "+2250102470306"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Abidjan",
+          "addressCountry": "CI"
+        },
+        "areaServed": "Côte d'Ivoire",
+        "priceRange": "$$",
+        "openingHours": "Mo-Sa 08:00-19:00"
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      /* Thème appliqué avant le rendu pour éviter tout flash.
+         Nuit = 19h00 → 06h30 (noir), le reste du temps (blanc). */
+      (function () {
+        try {
+          var m = localStorage.getItem("doxa.theme.v1") || "auto";
+          var h = new Date().getHours() + new Date().getMinutes() / 60;
+          var night = h >= 19 || h < 6.5;
+          var t = m === "day" ? "light" : m === "night" ? "dark" : night ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+          document.documentElement.style.colorScheme = t === "dark" ? "dark" : "light";
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <!-- Activation du service de devis / factures pro forma (Supabase).
+         Clé publique publishable — ne jamais remplacer par une clé secrète. -->
+    <script>
+      window.DOXA_PROFORMA = {
+        supabaseUrl: "https://zhvwgdxoevntgeyypotf.supabase.co",
+        anonKey: "sb_publishable_dP-MaIPzGDOD2Zyg9yaQgw_xc01L6Sv",
+      };
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
