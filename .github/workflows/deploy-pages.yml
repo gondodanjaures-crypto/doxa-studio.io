@@ -1,0 +1,64 @@
+# Déploiement automatique du site sur GitHub Pages.
+# Une fois GitHub Pages activé (Settings → Pages → Source : "GitHub Actions"),
+# chaque push sur la branche reconstruit et publie le site.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["arena/01a0f055-doxa-studio-io"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "doxa-studio-web-strategy (3)/package-lock.json"
+
+      - name: Installer les dépendances
+        run: npm ci
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Vérifier TypeScript
+        run: npm run typecheck
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Build de production
+        run: npm run build
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Tester le site (smoke test)
+        run: npm test
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Ajouter le domaine personnalisé
+        run: echo "doxa-studio.us.kg" > "doxa-studio-web-strategy (3)/dist/CNAME"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "doxa-studio-web-strategy (3)/dist"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true

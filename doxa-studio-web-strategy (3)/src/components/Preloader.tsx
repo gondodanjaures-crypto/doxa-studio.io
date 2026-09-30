@@ -41,9 +41,9 @@ export default function Preloader() {
             className="group relative flex flex-col items-center"
           >
             <BrandMark className="h-28 w-28 text-white object-contain sm:h-36 sm:w-36" />
-            <h1 className="mt-6 font-display text-4xl uppercase tracking-[0.06em] text-white sm:text-5xl">
+            <p className="mt-6 font-display text-4xl uppercase tracking-[0.06em] text-white sm:text-5xl">
               Doxa <span className="text-rouge">Studio</span>
-            </h1>
+            </p>
             <p className="mt-3 text-[10px] uppercase tracking-[0.5em] text-white/40">
               Studio visuel — Abidjan
             </p>

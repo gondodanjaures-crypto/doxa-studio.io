@@ -1,0 +1,58 @@
+# Déploiement automatique sur Netlify via GitHub Actions.
+#
+# ⚙️ Configuration (une seule fois, sans jamais partager vos accès ici) :
+#   1. Netlify → https://app.netlify.com/user/applications#personal-access-tokens
+#      → « New access token » → copiez-le.
+#   2. Netlify → Site configuration → General → « Site ID » → copiez-le.
+#   3. GitHub → Settings → Secrets and variables → Actions → « New repository secret » :
+#        NETLIFY_AUTH_TOKEN  = votre token Netlify
+#        NETLIFY_SITE_ID     = votre Site ID
+#   → le site est redéployé automatiquement à chaque push.
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: ["arena/01a0f055-doxa-studio-io"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: netlify-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "doxa-studio-web-strategy (3)/package-lock.json"
+
+      - name: Installer les dépendances
+        run: npm ci
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Vérifier TypeScript
+        run: npm run typecheck
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Build de production
+        run: npm run build
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Tester le site (smoke test)
+        run: npm test
+        working-directory: "doxa-studio-web-strategy (3)"
+
+      - name: Déployer sur Netlify
+        continue-on-error: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx --yes netlify-cli deploy --prod --dir "doxa-studio-web-strategy (3)/dist" --message "Deploy ${GITHUB_SHA::7}"

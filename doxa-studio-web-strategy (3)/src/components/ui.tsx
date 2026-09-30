@@ -57,8 +57,15 @@ export function SplitText({
   const words = text.split(" ");
   return (
     <span className={cn("inline-flex flex-wrap", className)}>
+      {/* Texte complet pour les lecteurs d'écran (les mots animés
+          ci-dessous sont décoratifs et masqués aux technologies d'assistance). */}
+      <span className="sr-only">{text}</span>
       {words.map((w, i) => (
-        <span key={`${w}-${i}`} className="overflow-hidden pb-[0.06em] pr-[0.26em]">
+        <span
+          key={`${w}-${i}`}
+          aria-hidden="true"
+          className="overflow-hidden pb-[0.06em] pr-[0.26em]"
+        >
           <motion.span
             className={cn("inline-block will-change-transform", wordClassName)}
             initial={{ y: "110%", opacity: 0 }}

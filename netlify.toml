@@ -1,0 +1,34 @@
+# Configuration Netlify — Doxa Studio
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+#
+# Le code du site est dans le dossier "doxa-studio-web-strategy (3)".
+# Netlify y construit le build Vite (fichier unique) et publie dist/.
+
+[build]
+  base = "doxa-studio-web-strategy (3)"
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Application mono-page : toute URL profonde renvoie l'app (les paramètres
+# ?proforma=… continuent de fonctionner).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# En-têtes de sécurité & performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
