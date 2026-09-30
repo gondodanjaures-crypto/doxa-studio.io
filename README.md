@@ -44,6 +44,27 @@ redirections, en-têtes). Dans le tableau de bord Netlify :
 
 Le site se redéploie automatiquement à chaque `git push` sur cette branche.
 
+#### Variante : déploiement automatique par GitHub Actions (token chez GitHub)
+
+Si vous préférez que ce soit GitHub Actions qui déploie sur Netlify (utile pour
+automatiser sans donner l'accès à votre compte à personne) :
+
+1. **Netlify** : https://app.netlify.com/user/applications#personal-access-tokens
+   → « New access token » → copiez-le *(ne le partagez jamais dans une discussion)*.
+2. **Netlify** : Site configuration → General → **Site ID** → copiez-le.
+3. **GitHub** : https://github.com/gondodanjaures-crypto/doxa-studio.io/settings/secrets/actions
+   → « New repository secret » × 2 :
+   - `NETLIFY_AUTH_TOKEN` = votre token Netlify
+   - `NETLIFY_SITE_ID` = votre Site ID
+4. Le workflow « Deploy to Netlify » (`.github/workflows/deploy-netlify.yml`)
+   publie le site à chaque push. Le token reste stocké chez GitHub.
+
+#### Astuce : déploiement instantané sans rien connecter (Netlify Drop)
+
+Téléchargez [`docs/index.html`](./docs/index.html) (le site déjà construit) et
+glissez-le sur https://app.netlify.com/drop → puis renommez le site en `doxa-studio`
+(Site configuration → Site name).
+
 ### Option 2 : GitHub Pages (alternative)
 
 Le site se déploie aussi via GitHub Actions (`.github/workflows/deploy-pages.yml`).
