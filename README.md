@@ -27,25 +27,37 @@ npm test          # smoke test : monte le bundle et vérifie le rendu réel (19 
 Le smoke test (jsdom) vérifie notamment : le montage de React, les sections
 principales, un seul `<h1>`, les `alt` d'images, l'absence d'erreurs JavaScript.
 
-## 🌐 Mise en ligne (GitHub Pages)
+## 🌐 Mise en ligne
 
-Le site se déploie automatiquement via GitHub Actions (`.github/workflows/deploy-pages.yml`) :
-build, tests et publication à chaque push. Il ne reste qu'à **activer GitHub Pages**
-(une seule fois) :
+### Option 1 : Netlify (recommandée)
+
+Le [`netlify.toml`](./netlify.toml) à la racine configure tout (build, publication,
+redirections, en-têtes). Dans le tableau de bord Netlify :
+
+1. **Add new site → Import an existing project → Deploy with GitHub** :
+   https://app.netlify.com/teams/gondodanjaures/projects
+2. Choisissez le dépôt `gondodanjaures-crypto/doxa-studio.io`
+3. **Branch to deploy** : `arena/01a0f055-doxa-studio-io` ⚠️ (le code est sur cette branche)
+   — le reste est détecté automatiquement grâce au `netlify.toml` → **Deploy**.
+4. **Site configuration → Site name → Change site name** : `doxa-studio`
+   → le site est sur **https://doxa-studio.netlify.app** (HTTPS gratuit) 🎉
+
+Le site se redéploie automatiquement à chaque `git push` sur cette branche.
+
+### Option 2 : GitHub Pages (alternative)
+
+Le site se déploie aussi via GitHub Actions (`.github/workflows/deploy-pages.yml`).
+Activez GitHub Pages une fois : **https://github.com/gondodanjaures-crypto/doxa-studio.io/settings/pages**
 
 1. Connectez-vous à GitHub avec le compte propriétaire du dépôt (`gondodanjaures-crypto`)
    **dans un navigateur** (Chrome, Safari…) — les réglages ne sont pas dans l'app GitHub.
-2. Ouvrez : **https://github.com/gondodanjaures-crypto/doxa-studio.io/settings/pages**
-3. Section **« Build and deployment »** → **Source** : choisissez **« GitHub Actions »** → *Save*.
-4. Onglet **Actions** : le workflow « Deploy to GitHub Pages » se lance → ~1 minute plus tard,
-   le site est en ligne sur : **https://gondodanjaures-crypto.github.io/doxa-studio.io/**
+2. **Source** : choisissez **« GitHub Actions »** → *Save*
+   (ou *Deploy from a branch* → `arena/01a0f055-doxa-studio-io` → `/docs`).
+3. Le site est en ligne sur : **https://gondodanjaures-crypto.github.io/doxa-studio.io/**
 
-> 💡 Alternative (sans Actions) : Source → *Deploy from a branch* → branche
-> `arena/01a0f055-doxa-studio-io` → dossier `/docs` → *Save* (le build est déjà prêt
-> dans [`docs/`](./docs/)).
-
-Pour publier une nouvelle version du site après une modification : `git push` suffit
-(ou manuellement : `npm run deploy:pages` puis commit du dossier `docs/`).
+> ⚠️ Avec l'option « GitHub Actions », autorisez aussi la branche à déployer :
+> Settings → Environments → `github-pages` → *Deployment branches and tags* →
+> ajoutez `arena/01a0f055-doxa-studio-io`.
 
 ## 🏷️ Nom de domaine gratuit
 
