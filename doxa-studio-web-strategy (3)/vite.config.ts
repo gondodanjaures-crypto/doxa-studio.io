@@ -16,4 +16,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  // Autorise l'aperçu via un domaine externe (sandbox / tunnel de preview).
+  server: { allowedHosts: true },
+  preview: { allowedHosts: true },
 });
