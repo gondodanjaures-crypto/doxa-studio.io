@@ -1,0 +1,2 @@
+[functions.proforma]
+verify_jwt = false
